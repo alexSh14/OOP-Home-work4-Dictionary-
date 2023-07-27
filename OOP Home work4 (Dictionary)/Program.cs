@@ -1,35 +1,29 @@
-﻿Dictionary<string, Action> commands = new Dictionary<string, Action>();
-commands["привет"] = SayHello;
-commands["время"] = ShowTime;
-commands["пока"] = SayGoodbye;
+﻿using System;
 
-Console.WriteLine("Введите команду (привет, время, пока):");
-string input = Console.ReadLine().ToLower();
+        CommandDelegate commandDelegate;
 
-if (commands.ContainsKey(input))
-{
-    Action command = commands[input];
-    command();
-}
-else
-{
-    Console.WriteLine("Неверная команда!");
-}
+        Console.WriteLine("Введите команду (привет, время, пока):");
+        string input = Console.ReadLine().ToLower();
 
-Console.ReadLine();
+        switch (input)
+        {
+            case "привет":
+                commandDelegate = CommandHandlers.SayHello;
+                break;
+            case "время":
+                commandDelegate = CommandHandlers.ShowTime;
+                break;
+            case "пока":
+                commandDelegate = CommandHandlers.SayGoodbye;
+                break;
+            default:
+                Console.WriteLine("Неверная команда!");
+                Console.ReadLine();
+                return;
+        }
+
+        commandDelegate();
+
+        Console.ReadLine();
     
 
-    static void SayHello()
-{
-    Console.WriteLine("Hello!");
-}
-
-static void ShowTime()
-{
-    Console.WriteLine("Текущее время: " + DateTime.Now.ToString("HH:mm:ss"));
-}
-
-static void SayGoodbye()
-{
-    Console.WriteLine("Bye!");
-}
