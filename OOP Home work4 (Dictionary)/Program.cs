@@ -24,6 +24,6 @@
 
         commandDelegate();
 
-        Console.ReadLine();
+   
     
 
